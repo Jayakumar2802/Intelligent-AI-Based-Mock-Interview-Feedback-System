@@ -1,7 +1,11 @@
+# Intelligent AI-Based Mock Interview Feedback System
+
 A web-based application that helps users practice mock interviews and receive intelligent, AI-driven feedback.
 The system simulates interview scenarios, analyzes user responses, and provides insights to improve communication and interview performance.
 
-Features
+---
+
+## Features
 
 * Mock interview simulation using AI
 * Intelligent question generation
@@ -10,12 +14,17 @@ Features
 * Secure API key handling using environment variables
 * Real-time analysis and response evaluation
 
-Installation
-Prerequisites
+---
+
+## Installation
+
+### Prerequisites
 
 * Python 3.9 or higher
 * Windows / Linux / macOS
 * Internet connection (for AI APIs)
+
+---
 
 ### Setup
 
@@ -79,7 +88,7 @@ GROQ_API_KEY=your_key_here
 OPENROUTER_API_KEY=your_key_here
 ```
 
- **Important:**
+**Important:**
 
 * Never upload `.env` to GitHub
 * `.env` is already ignored using `.gitignore`
@@ -154,8 +163,12 @@ Intelligent-AI-Based-Mock-Interview-Feedback-System/
 
 ---
 
+## Conclusion
 
-* Make it **viva / review ready**
-* Match **exact GitHub formatting**
+The Intelligent AI-Based Mock Interview Feedback System provides a practical and interactive platform for interview preparation.
+By using AI-driven analysis and feedback, the system helps users build confidence and improve their interview skills effectively.
 
-Just tell me 👍
+---
+
+
+
