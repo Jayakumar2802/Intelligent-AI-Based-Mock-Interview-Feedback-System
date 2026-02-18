@@ -1,0 +1,28 @@
+from flask import Flask, render_template, jsonify, request
+
+# Added by assistant: job roles list
+job_roles = [
+    'Software Engineer', 'Data Scientist', 'DevOps Engineer', 'Product Manager', 'UI/UX Designer', 'QA Engineer', 'AI/ML Researcher', 'Technical Support'
+]
+
+import csv, base64, tempfile, os
+from pathlib import Path
+app = Flask(__name__)
+@app.route('/')
+def index(): return render_template('index.html', job_roles=job_roles)
+@app.route('/questions')
+def questions():
+    qs=[]; p=Path('datasets/questions.csv')
+    if p.exists():
+        import csv
+        with open(p, newline='', encoding='utf-8') as f:
+            r=csv.DictReader(f)
+            for row in r: qs.append({'career':row.get('career','General'),'question':row.get('question','')})
+    return jsonify(qs)
+@app.route('/counsellor') 
+def counsellor(): return render_template('counsellor.html', job_roles=job_roles)
+@app.route('/upload_audio', methods=['POST'])
+def upload_audio():
+    data = request.get_json() or {}
+    return jsonify({'status':'ok','transcript':'[transcript placeholder]','analysis':{'source':'local'}})
+if __name__=='__main__': app.run(debug=True, host='0.0.0.0', port=5000)

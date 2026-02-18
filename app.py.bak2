@@ -1,0 +1,94 @@
+from flask import Flask, render_template, jsonify, request
+
+# Added by assistant: job roles list
+job_roles = [
+    'Software Engineer', 'Data Scientist', 'DevOps Engineer', 'Product Manager', 'UI/UX Designer', 'QA Engineer', 'AI/ML Researcher', 'Technical Support'
+]
+
+import csv, base64, tempfile, os
+from pathlib import Path
+app = Flask(__name__)
+@app.route('/')
+def index(): return render_template('index.html', job_roles=job_roles)
+@app.route('/questions')
+def questions():
+    qs=[]; p=Path('datasets/questions.csv')
+    if p.exists():
+        import csv
+        with open(p, newline='', encoding='utf-8') as f:
+            r=csv.DictReader(f)
+            for row in r: qs.append({'career':row.get('career','General'),'question':row.get('question','')})
+    return jsonify(qs)
+@app.route('/counsellor') 
+def counsellor(): return render_template('counsellor.html', job_roles=job_roles)
+
+import base64, pathlib, requests, os, time
+UPLOAD_DIR = Path('uploads')
+UPLOAD_DIR.mkdir(exist_ok=True)
+def _load_keys():
+    # try env, then keys.json
+    keys = {}
+    hf = os.environ.get('HUGGINGFACE_API_KEY')
+    gem = os.environ.get('GEMINI_API_KEY')
+    if not hf or not gem:
+        p = Path('keys.json')
+        if p.exists():
+            try:
+                d = json.loads(p.read_text(encoding='utf-8'))
+                hf = hf or d.get('huggingface_api_key')
+                gem = gem or d.get('gemini_api_key')
+            except Exception:
+                pass
+    return {'huggingface': hf, 'gemini': gem}
+
+@app.route('/upload_audio', methods=['POST'])
+def upload_audio():
+    payload = request.get_json() or {}
+    filename = payload.get('filename') or f'response_{int(time.time())}.webm'
+    audio_b64 = payload.get('audio_base64')
+    career = payload.get('career','')
+    qidx = payload.get('question_index','')
+    question = payload.get('question','')
+    if not audio_b64:
+        return jsonify({'status':'error','error':'no audio provided'}), 400
+    try:
+        audio_bytes = base64.b64decode(audio_b64)
+    except Exception as e:
+        return jsonify({'status':'error','error':'invalid base64','detail':str(e)}), 400
+    save_path = UPLOAD_DIR / filename
+    with open(save_path, 'wb') as wf:
+        wf.write(audio_bytes)
+    # Try to transcribe with Hugging Face if key available
+    keys = _load_keys()
+    hf_key = keys.get('huggingface')
+    transcript = None
+    hf_response_raw = None
+    if hf_key:
+        try:
+            hf_url = "https://api-inference.huggingface.co/models/openai/whisper-large-v2"
+            headers = {"Authorization": f"Bearer {hf_key}"}
+            # send binary audio bytes
+            resp = requests.post(hf_url, headers=headers, data=audio_bytes, timeout=120)
+            hf_response_raw = resp.text
+            if resp.status_code == 200:
+                # attempt to parse json or text
+                try:
+                    j = resp.json()
+                    # HF sometimes returns {'text': '...'} for ASR
+                    transcript = j.get('text') or j.get('transcription') or None
+                    if not transcript and isinstance(j, dict):
+                        # join values as fallback
+                        transcript = ' '.join([str(v) for v in j.values()])
+                except Exception:
+                    # fallback to raw text
+                    transcript = resp.text
+            else:
+                transcript = None
+        except Exception as e:
+            transcript = None
+    result = {'status':'ok','saved_path':str(save_path), 'transcript': transcript or '', 'hf_raw': hf_response_raw or ''}
+    return jsonify(result)
+
+    data = request.get_json() or {}
+    return jsonify({'status':'ok','transcript':'[transcript placeholder]','analysis':{'source':'local'}})
+if __name__=='__main__': app.run(debug=True, host='0.0.0.0', port=5000)

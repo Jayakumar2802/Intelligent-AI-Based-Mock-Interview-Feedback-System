@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Intelligent AI Based Mock Interview Feedback System{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/futuristic.css') }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Professional Header -->
+  <header class="header">
+    <div class="container">
+      <nav class="navbar">
+        <a href="{{ url_for('index') }}" class="logo">
+          <div class="logo-icon">AI</div>
+          Intelligent AI Based Mock Interview Feedback System
+        </a>
+        <div class="nav-links">
+          <a href="{{ url_for('index') }}" class="nav-link {% if request.endpoint == 'index' %}active{% endif %}">Home</a>
+          <a href="{{ url_for('practice') }}" class="nav-link {% if request.endpoint == 'practice' %}active{% endif %}">Practice Interview</a>
+          <a href="{{ url_for('counsellor') }}" class="nav-link {% if request.endpoint == 'counsellor' %}active{% endif %}">Student Counsellor</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <!-- Professional Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="copyright">
+          © 2025 Intelligent AI Based Mock Interview Feedback System. All rights reserved.
+        </div>
+        <div class="footer-links">
+          <a href="#" class="footer-link">Privacy Policy</a>
+          <a href="#" class="footer-link">Terms of Service</a>
+          <a href="#" class="footer-link">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

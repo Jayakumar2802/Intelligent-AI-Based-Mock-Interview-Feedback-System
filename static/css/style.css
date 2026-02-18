@@ -1,0 +1,62 @@
+:root{
+  --blue-700:#1e3a8a;
+  --blue-600:#2563eb;
+  --muted:#6b7280;
+  --bg:#f6f9ff;
+  --card:#fff;
+  --glass: rgba(255,255,255,0.06);
+}
+
+*{box-sizing:border-box}
+body{font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,Helvetica,Arial;margin:0;background:var(--bg);color:#0b1220}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+a{color:inherit}
+
+.hero{background:linear-gradient(90deg,var(--blue-700),#3b82f6);color:#fff;padding:64px 0;border-bottom-left-radius:12px;border-bottom-right-radius:12px}
+.hero-grid{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.hero-left{max-width:640px}
+.hero h1{font-size:44px;margin:0 0 12px;font-weight:800}
+.lead{font-size:18px;opacity:.95;margin-bottom:12px}
+.hero-ctas{display:flex;gap:12px;margin:16px 0}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:0;cursor:pointer;font-weight:700}
+.btn.primary{background:linear-gradient(90deg,var(--blue-600),#60a5fa);color:#fff;box-shadow:0 10px 30px rgba(37,99,235,.12)}
+.btn.outline{background:#fff;color:var(--blue-600);padding:8px 12px;border-radius:10px}
+.hero-features{margin-top:10px;display:flex;flex-direction:column;gap:8px}
+.hero-visual{display:flex;align-items:center;justify-content:center;opacity:.95}
+
+/* cards layout */
+.cards{display:grid;grid-template-columns:1fr 360px;gap:18px;padding:28px 0}
+.card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 8px 30px rgba(12,18,42,0.06)}
+.card-head h2{margin:0}
+.sub{color:var(--muted);margin-top:6px}
+
+/* interview controls */
+.controls{display:flex;align-items:center;gap:12px;margin:14px 0}
+.role-label{font-weight:600}
+#role-input{padding:10px;border-radius:8px;border:1px solid #e6eefc;min-width:300px}
+.small{padding:8px 10px;font-size:14px}
+
+/* question box & media */
+.question-box{min-height:110px;padding:14px;border-radius:10px;border:1px dashed #eef6ff;background:linear-gradient(180deg,#fbfdff,#fff);font-size:18px}
+.record-controls{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+.status{color:var(--muted)}
+.media-row{display:flex;gap:12px;align-items:flex-start;margin-top:12px}
+.webcam{width:320px;height:200px;border-radius:10px;border:1px solid #e6eefc;object-fit:cover}
+.right-col{flex:1}
+
+/* transcript & summary */
+.card-muted{background:#fbfcff;padding:12px;border-radius:8px;margin-top:10px}
+.summary-panel{margin-top:12px;border:1px solid #eef6ff;border-radius:8px;padding:10px}
+.summary-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #f1f5f9}
+.summary-row:last-child{border-bottom:none}
+
+/* counsellor */
+.counsellor .chat-box{min-height:220px;border-radius:8px;border:1px solid #eef6ff;padding:10px;background:#fff}
+.chat-input{display:flex;gap:8px;margin-top:10px}
+
+/* responsive */
+@media (max-width:980px){
+  .hero h1{font-size:32px}
+  .cards{grid-template-columns:1fr}
+  .webcam{width:200px;height:140px}
+}

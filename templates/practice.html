@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+{% block title %}Practice Interview - Select Role{% endblock %}
+{% block content %}
+<div class="section">
+  <div class="container">
+    <!-- Header Section -->
+    <div class="page-header" style="text-align: center; margin-bottom: var(--space-12);">
+      <h1 style="font-size: var(--font-size-4xl); font-weight: 800; color: var(--text-primary); margin-bottom: var(--space-4);">
+        Practice Interview
+      </h1>
+      <p style="font-size: var(--font-size-xl); color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+        Prepare for your dream job with AI-powered mock interviews
+      </p>
+    </div>
+
+    <div class="practice-container">
+      <!-- Role Selection Panel -->
+      <div class="role-panel">
+        <div class="panel-header">
+          <h2 style="font-size: var(--font-size-xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-2);">
+            Select Job Role
+          </h2>
+          <p style="color: var(--text-muted); font-size: var(--font-size-sm);">
+            Choose your target position to start practicing
+          </p>
+        </div>
+        
+        <div class="role-search" style="margin-bottom: var(--space-4);">
+          <input type="text" id="roleSearch" placeholder="Search roles..." style="width: 100%; padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius); font-size: var(--font-size-sm);">
+        </div>
+        
+        <ul class="role-list">
+          {% for role in job_roles %}
+          <li class="role-item" data-role="{{ role }}">
+            <div class="role-content">
+              <span class="role-name">{{ role }}</span>
+              <span class="role-arrow">→</span>
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+        
+        <div class="role-actions" style="margin-top: var(--space-6);">
+          <a id="start-interview" class="btn btn-primary disabled" href="#" style="width: 100%; justify-content: center; padding: var(--space-5); font-size: var(--font-size-lg);">
+            <span style="margin-right: var(--space-2);">🎤</span>
+            Start Practice Interview
+          </a>
+        </div>
+      </div>
+      
+      <!-- Info Panel -->
+      <div class="info-panel">
+        <div class="info-header">
+          <h3 style="font-size: var(--font-size-xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-4);">
+            How It Works
+          </h3>
+        </div>
+        
+        <div class="info-steps">
+          <div class="step" style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+            <div class="step-icon" style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; flex-shrink: 0;">
+              1
+            </div>
+            <div class="step-content">
+              <h4 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-2);">
+                Choose Your Role
+              </h4>
+              <p style="color: var(--text-secondary); line-height: 1.6;">
+                Select from our comprehensive list of job roles tailored to your career goals.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step" style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+            <div class="step-icon" style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; flex-shrink: 0;">
+              2
+            </div>
+            <div class="step-content">
+              <h4 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-2);">
+                AI-Powered Interview
+              </h4>
+              <p style="color: var(--text-secondary); line-height: 1.6;">
+                Experience realistic interview questions with our intelligent AI interviewer.
+              </p>
+            </div>
+          </div>
+          
+          <div class="step" style="display: flex; gap: var(--space-4); margin-bottom: var(--space-6);">
+            <div class="step-icon" style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--primary), var(--primary-light)); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; flex-shrink: 0;">
+              3
+            </div>
+            <div class="step-content">
+              <h4 style="font-size: var(--font-size-lg); font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-2);">
+                Instant Feedback
+              </h4>
+              <p style="color: var(--text-secondary); line-height: 1.6;">
+                Get real-time transcripts and suggested answers to improve your performance.
+              </p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Pro Tip -->
+        <div class="pro-tip" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(251, 191, 36, 0.05)); border-left: 4px solid var(--warning); padding: var(--space-5); border-radius: var(--radius);">
+          <div style="display: flex; align-items: flex-start; gap: var(--space-3);">
+            <div style="color: var(--warning); font-size: var(--font-size-lg);">💡</div>
+            <div>
+              <h4 style="font-size: var(--font-size-base); font-weight: 600; color: var(--text-primary); margin-bottom: var(--space-2);">
+                Pro Tip
+              </h4>
+              <p style="color: var(--text-secondary); font-size: var(--font-size-sm); margin: 0; line-height: 1.5;">
+                The AI will automatically advance to the next question after 10 seconds of silence, allowing you to focus on delivering your best answers without manual navigation.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.practice-container {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--space-8);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.role-panel {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.info-panel {
+  background: var(--surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.role-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.role-item {
+  padding: var(--space-4) var(--space-5);
+  border-radius: var(--radius-lg);
+  margin-bottom: var(--space-3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid var(--border);
+  background: var(--surface);
+}
+
+.role-item:hover {
+  border-color: var(--primary-light);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.role-item.selected {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(96, 165, 250, 0.02));
+  box-shadow: var(--shadow-lg);
+}
+
+.role-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.role-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.role-arrow {
+  color: var(--text-muted);
+  font-weight: 600;
+  transition: transform 0.3s ease;
+}
+
+.role-item.selected .role-arrow {
+  color: var(--primary);
+  transform: translateX(4px);
+}
+
+.role-search input {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.role-search input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Scrollbar styling */
+.role-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.role-list::-webkit-scrollbar-track {
+  background: var(--background);
+  border-radius: 3px;
+}
+
+.role-list::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.role-list::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+  .practice-container {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+  
+  .page-header h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .page-header p {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .role-panel,
+  .info-panel {
+    padding: var(--space-6);
+  }
+  
+  .step {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .step-icon {
+    align-self: center;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  let selected = null;
+  
+  // Role selection
+  document.querySelectorAll('.role-item').forEach(item => {
+    item.addEventListener('click', function(){
+      document.querySelectorAll('.role-item').forEach(i => i.classList.remove('selected'));
+      this.classList.add('selected');
+      selected = this.dataset.role;
+      const btn = document.getElementById('start-interview');
+      btn.classList.remove('disabled');
+      btn.href = '/interview/' + encodeURIComponent(selected);
+    });
+  });
+  
+  // Role search functionality
+  const roleSearch = document.getElementById('roleSearch');
+  if (roleSearch) {
+    roleSearch.addEventListener('input', function() {
+      const searchTerm = this.value.toLowerCase();
+      const roleItems = document.querySelectorAll('.role-item');
+      
+      roleItems.forEach(item => {
+        const roleName = item.dataset.role.toLowerCase();
+        if (roleName.includes(searchTerm)) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  }
+});
+</script>
+{% endblock %}

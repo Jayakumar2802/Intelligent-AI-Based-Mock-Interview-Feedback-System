@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% block title %}Intelligent AI Based Mock Interview Feedback System - AI-Powered Interview Practice{% endblock %}
+{% block content %}
+<!-- Hero Section -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <h1 class="hero-title">AI-Powered Student Interview & Student Counsellor</h1>
+      <p class="hero-subtitle">Master your interview skills with realistic AI practice and get personalized career guidance to land your dream job</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('practice') }}">
+          <span style="margin-right: var(--space-2);">🎤</span>
+          Start Practice Interview
+        </a>
+        <a class="btn btn-outline" href="{{ url_for('counsellor') }}">
+          <span style="margin-right: var(--space-2);">💬</span>
+          Talk to Career Advisor
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="section">
+  <div class="container">
+    <div class="section-header" style="text-align: center; margin-bottom: var(--space-12);">
+      <h2 style="font-size: var(--font-size-3xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-4);">
+        Why Choose Intelligent AI Based Mock Interview Feedback System?
+      </h2>
+      <p style="font-size: var(--font-size-lg); color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
+        Comprehensive interview preparation powered by advanced AI technology
+      </p>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <h3 class="feature-title">Role-Specific Questions</h3>
+        <p class="feature-description">Practice with questions tailored to your target job role and industry from our extensive database.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3 class="feature-title">AI-Powered Feedback</h3>
+        <p class="feature-description">Get instant analysis of your answers with suggestions for improvement using advanced AI models.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3 class="feature-title">Performance Analytics</h3>
+        <p class="feature-description">Track your progress over time with detailed performance metrics and improvement recommendations.</p>
+      </div>
+    </div>
+    
+    <!-- Additional Features -->
+    <div class="features-grid" style="margin-top: var(--space-8);">
+      <div class="feature-card">
+        <div class="feature-icon">🎤</div>
+        <h3 class="feature-title">Speech Recognition</h3>
+        <p class="feature-description">Advanced speech-to-text technology transcribes your answers in real-time for analysis.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔊</div>
+        <h3 class="feature-title">Text-to-Speech</h3>
+        <p class="feature-description">Natural AI voice asks questions and provides feedback for a realistic interview experience.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💡</div>
+        <h3 class="feature-title">Smart Guidance</h3>
+        <p class="feature-description">AI career counsellor provides personalized advice and answers to your career questions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works Section -->
+<section class="section" style="background: var(--surface);">
+  <div class="container">
+    <div class="section-header" style="text-align: center; margin-bottom: var(--space-12);">
+      <h2 style="font-size: var(--font-size-3xl); font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-4);">
+        How It Works
+      </h2>
+    </div>
+    
+    <div class="features-grid">
+      <div class="feature-card">
+        <div style="font-size: 48px; margin-bottom: var(--space-4);">1</div>
+        <h3 class="feature-title">Select Your Role</h3>
+        <p class="feature-description">Choose from 100+ job roles including Software Engineer, Data Scientist, Product Manager, and more.</p>
+      </div>
+      <div class="feature-card">
+        <div style="font-size: 48px; margin-bottom: var(--space-4);">2</div>
+        <h3 class="feature-title">Practice Interview</h3>
+        <p class="feature-description">AI asks realistic questions and records your answers with automatic speech recognition.</p>
+      </div>
+      <div class="feature-card">
+        <div style="font-size: 48px; margin-bottom: var(--space-4);">3</div>
+        <h3 class="feature-title">Get Instant Feedback</h3>
+        <p class="feature-description">Receive transcribed answers and AI-suggested ideal responses to improve your skills.</p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,231 @@
+{% extends "base.html" %}
+{% block title %}AI Student Counsellor{% endblock %}
+{% block content %}
+<div class="section">
+  <div class="container counsellor-container">
+    <h1 style="font-size: var(--font-size-3xl); font-weight: 700; margin-bottom: var(--space-6); text-align: center;">
+      AI Student Counsellor
+    </h1>
+    
+    <div class="counsellor-info" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: var(--space-5); border-radius: var(--radius-lg); margin-bottom: var(--space-6); text-align: center;">
+      <h2 style="margin-bottom: var(--space-3);">🎓 Your Personal Education Guide</h2>
+      <p style="margin-bottom: var(--space-3); opacity: 0.9;">Get personalized advice on career paths, study techniques, stress management, and more</p>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); font-size: var(--font-size-sm);">
+        <span style="background: rgba(255,255,255,0.2); padding: var(--space-2) var(--space-3); border-radius: var(--radius);">Career Guidance</span>
+        <span style="background: rgba(255,255,255,0.2); padding: var(--space-2) var(--space-3); border-radius: var(--radius);">Study Advice</span>
+        <span style="background: rgba(255,255,255,0.2); padding: var(--space-2) var(--space-3); border-radius: var(--radius);">Stress Management</span>
+        <span style="background: rgba(255,255,255,0.2); padding: var(--space-2) var(--space-3); border-radius: var(--radius);">Skill Development</span>
+      </div>
+    </div>
+
+    <div class="counsellor-chat">
+      <div class="chat-container" style="background: var(--surface); border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow);">
+        <div style="padding: var(--space-4); background: var(--surface); border-bottom: 1px solid var(--border);">
+          <div style="display: flex; align-items: center; gap: var(--space-3);">
+            <div style="width: 40px; height: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600;">AI</div>
+            <div>
+              <div style="font-weight: 600; color: var(--text-primary);">AI Student Counsellor</div>
+              <div style="font-size: var(--font-size-sm); color: var(--text-muted);">Online • Ready to help</div>
+            </div>
+          </div>
+        </div>
+        
+        <div id="cChatBody" class="chat-messages" style="height: 400px; overflow-y: auto; padding: var(--space-4); background: #f8fafc;"></div>
+        
+        <div class="chat-input" style="padding: var(--space-4); background: var(--surface); border-top: 1px solid var(--border);">
+          <div style="display: flex; gap: var(--space-3);">
+            <input id="cInput" placeholder="Ask about careers, studies, stress, skills..." style="flex: 1; padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius); font-size: var(--font-size-sm);"/>
+            <button id="cSend" class="btn btn-primary" style="padding: var(--space-3) var(--space-5);">Send</button>
+          </div>
+          <div style="margin-top: var(--space-3); font-size: var(--font-size-xs); color: var(--text-muted); text-align: center;">
+            Try: "What should I study?" • "Career guidance" • "How to manage stress?" • "Which programming language?"
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Questions Panel -->
+    <div class="quick-questions" style="margin-top: var(--space-6);">
+      <h3 style="text-align: center; margin-bottom: var(--space-4); color: var(--text-primary);">💡 Quick Questions</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--space-3);">
+        <button class="quick-btn" data-question="What career should I choose?">Career Guidance</button>
+        <button class="quick-btn" data-question="How to improve my study habits?">Study Tips</button>
+        <button class="quick-btn" data-question="I'm feeling stressed about exams">Stress Help</button>
+        <button class="quick-btn" data-question="Which programming language should I learn?">Tech Skills</button>
+        <button class="quick-btn" data-question="How to balance studies and personal life?">Work-Life Balance</button>
+        <button class="quick-btn" data-question="What are the best fields for future jobs?">Future Jobs</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.chat-messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.message {
+  max-width: 80%;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-lg);
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+  align-self: flex-end;
+  background: var(--primary);
+  color: white;
+  border-bottom-right-radius: var(--radius);
+}
+
+.message.bot {
+  align-self: flex-start;
+  background: white;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Quick buttons */
+.quick-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.quick-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+/* typing indicator */
+.typing-indicator { display: inline-flex; align-items: center; gap: 4px; }
+.typing-dot { width: 6px; height: 6px; background: var(--text-muted); border-radius: 50%; animation: typing 1.4s infinite ease-in-out; }
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+@keyframes typing { 0%, 80%, 100% { transform: scale(0.8); opacity: 0.5; } 40% { transform: scale(1); opacity: 1; } }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const chatBody = document.getElementById('cChatBody');
+  const input = document.getElementById('cInput');
+  const sendBtn = document.getElementById('cSend');
+
+  // Add welcome message (no source label)
+  function addWelcomeMessage() {
+    const welcomeMsg = document.createElement('div');
+    welcomeMsg.className = 'message bot';
+    welcomeMsg.innerHTML = `
+      <div>
+        <strong>AI Counsellor:</strong> Hello! I'm your AI Student Counsellor 🎓<br><br>
+        I can help you with:<br>
+        • Career guidance and future planning<br>
+        • Study techniques and academic advice<br>
+        • Stress management and motivation<br>
+        • Skill development and learning paths<br>
+        • Work-life balance and personal growth<br><br>
+        What would you like to discuss today?
+      </div>
+    `;
+    chatBody.appendChild(welcomeMsg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  }
+
+  addWelcomeMessage();
+
+  function sendMessage() {
+    const question = input.value.trim();
+    if (!question) return;
+
+    // user bubble
+    const userMsg = document.createElement('div');
+    userMsg.className = 'message user';
+    userMsg.innerHTML = `<div><strong>You:</strong> ${question}</div>`;
+    chatBody.appendChild(userMsg);
+    input.value = '';
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // typing bubble
+    const typingMsg = document.createElement('div');
+    typingMsg.className = 'message bot';
+    typingMsg.innerHTML = `
+      <div>
+        <strong>AI Counsellor:</strong> 
+        <span class="typing-indicator">
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+          <span class="typing-dot"></span>
+        </span>
+      </div>
+    `;
+    chatBody.appendChild(typingMsg);
+    chatBody.scrollTop = chatBody.scrollHeight;
+
+    // backend call
+    fetch('/counsellor_chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ question })
+    })
+    .then(r => r.json())
+    .then(data => {
+      chatBody.removeChild(typingMsg);
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message bot';
+
+      if (data.ok) {
+        // show only the reply text (no API/source labels)
+        botMsg.innerHTML = `<div><strong>AI Counsellor:</strong> ${data.answer}</div>`;
+      } else {
+        botMsg.innerHTML = `<div><strong>AI Counsellor:</strong> I’m having trouble processing your question right now. Please try again in a moment.</div>`;
+      }
+
+      chatBody.appendChild(botMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    })
+    .catch(err => {
+      console.error('Counsellor chat error:', err);
+      chatBody.removeChild(typingMsg);
+
+      const botMsg = document.createElement('div');
+      botMsg.className = 'message bot';
+      botMsg.innerHTML = `<div><strong>AI Counsellor:</strong> I'm having connection issues right now. Please check your internet and try again.</div>`;
+      chatBody.appendChild(botMsg);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    });
+  }
+
+  // events
+  sendBtn.addEventListener('click', sendMessage);
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+
+  // quick buttons
+  document.querySelectorAll('.quick-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      input.value = this.getAttribute('data-question');
+      sendMessage();
+    });
+  });
+
+  input.focus();
+});
+</script>
+{% endblock %}
