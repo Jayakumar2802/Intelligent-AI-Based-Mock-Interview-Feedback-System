@@ -1,3 +1,8 @@
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 from flask import Flask, render_template, jsonify, request, session
 import os, json, csv, base64, time, logging, requests, subprocess, shutil
 from pathlib import Path
@@ -7,6 +12,7 @@ import re
 from collections import Counter
 import statistics
 import urllib.parse
+
 
 # -------------------- CONFIG --------------------
 app = Flask(__name__)
