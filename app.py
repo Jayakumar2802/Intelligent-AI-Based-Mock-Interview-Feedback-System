@@ -1692,9 +1692,6 @@ app.jinja_env.globals['static_file_exists'] = static_file_exists
 
 # -------------------- MAIN --------------------
 if __name__ == "__main__":
-    
-    app.run(host="0.0.0.0", port=5000, debug=True)
-    
 
     # Test loading questions and keys
     questions = load_questions()
