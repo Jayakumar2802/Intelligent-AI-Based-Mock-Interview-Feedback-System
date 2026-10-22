@@ -162,6 +162,14 @@ Intelligent-AI-Based-Mock-Interview-Feedback-System/
 * AI-based interview skill assessment
 
 ---
+## 👥 Contributors
+
+We developed this project through collaboration, teamwork, and shared learning.
+
+- **Jayakumar Balikai** 
+- **Charan C M**
+
+
 
 ## Conclusion
 
